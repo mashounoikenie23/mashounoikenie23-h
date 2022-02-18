@@ -1,0 +1,243 @@
+{
+  "id": "com.ikea.tradfri.gateway",
+  "sdk": 2,
+  "name": {
+    "en": "IKEA Trådfri Gateway"
+  },
+  "description": {
+    "en": "Control your IKEA Trådfri Gateway with Homey."
+  },
+  "category": "lights",
+  "version": "0.1.5",
+  "compatibility": ">=4.2.0",
+  "author": {
+    "name": "Rogier Hofboer",
+    "email": "rogier@hofboer.nl"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Rogier Hofboer",
+        "email": "rogier@hofboer.nl"
+      },
+	  {
+        "name": "Espen Ljosland",
+        "email": "espen@ljosland.com"
+      },
+      {
+        "name": "Sven ten Raa",
+        "email": "sventenraa@gmail.com"
+      },
+      {
+        "name": "Leonard 'lvhv91'"
+      },
+      {
+        "name": "Vegard Fladby 'Allram'",
+        "email": "vegard.fladby@gmail.com"
+      },
+      {
+        "name": "Anders Jansson",
+        "email": "anders@evx.se"
+      },
+      {
+        "name": "Johan Bendz",
+        "email": "johan_bendz@hotmail.com"
+      },
+      {
+        "name": "Kjetil Haugland",
+        "email": "hauglandkjetil@gmail.com"
+      }
+    ]
+  },
+  "permissions": [],
+  "images": {
+    "large": "/assets/images/large.png",
+    "small": "/assets/images/small.png"
+  },
+  "drivers": [
+    {
+      "id": "light",
+      "name": {
+        "en": "Light",
+        "no": "Lys",
+    	"sv": "Belysning"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim",
+        "light_temperature",
+        "light_hue",
+        "light_saturation"
+      ],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "large": "/drivers/light/assets/images/large.png",
+        "small": "/drivers/light/assets/images/small.png"
+      }
+    },
+    {
+      "id": "group",
+      "name": {
+        "en": "Group",
+        "no": "Gruppe",
+    	"sv": "Grupp"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim"
+      ],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "large": "/drivers/light/assets/images/large.png",
+        "small": "/drivers/light/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "id": "force_individual_dim",
+          "type": "checkbox",
+          "label": {
+            "en": "Force set dim value individually for each light",
+            "no": "Krev at dimmenivå settes individuelt for hvert lys",
+	        "sv": "Tvinga separat inställning av dim-nivå per belysning"
+          },
+          "hint": {
+            "en": "Enable this if you experience issues where not all lights in group are dimmed to requested value.",
+            "no": "Aktivert hvis du har problemer med at ikke alle lysene blir dimmet til satt verdi.",
+	        "sv": "Aktivera denna om du upplever att inte all belysning i en grupp sätts till angiven nivå"
+          },
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "plug",
+      "name": {
+        "en": "Plug",
+        "no": "Veggplugg",
+    	"sv": "Vägguttag"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff",
+        "meter_power"
+      ],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "large": "/drivers/plug/assets/images/large.png",
+        "small": "/drivers/plug/assets/images/small.png"
+      }
+    },
+    {
+      "id": "blinds",
+      "name": {
+        "en": "Roller Blind",
+        "no": "Rullegardin",
+        "nl": "Rolgordijn",
+        "de": "Rollo",
+    	"sv": "Rullgardin"
+      },
+      "class": "blinds",
+      "capabilities": [
+        "onoff",
+        "windowcoverings_set",
+        "measure_battery",
+        "alarm_battery"
+      ],
+      "energy": {
+        "batteries": [ "INTERNAL" ]
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "large": "/drivers/blinds/assets/images/large.png",
+        "small": "/drivers/blinds/assets/images/small.png"
+      }
+    }
+  ],
+  "flow": {
+    "actions": [
+      {
+        "id": "setScene",
+        "title": {
+          "en": "Set a mood",
+          "no": "Sett en stemning",
+    	    "sv": "Skapa en stämning"
+        },
+        "args": [
+          {
+            "name": "group",
+            "type": "device",
+            "filter": "driver_id=group"
+          },
+          {
+            "name": "scene",
+            "type": "autocomplete"
+          }
+        ]
+      },
+      {
+        "id": "setGatewayScene",
+        "title": {
+          "en": "Set a scene",
+          "no": "Sett en scene",
+          "sv": "Sätta en scen"
+        },
+        "args": [
+          {
+            "name": "gatewayScene",
+            "type": "autocomplete"
+          }
+        ]
+      }
+    ]
+  }
+}

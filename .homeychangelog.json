@@ -1,0 +1,14 @@
+{
+  "0.1.0": {
+    "en": "Added blinds. Updated to latest node-tradfri-client."
+  },
+  "0.1.3": {
+    "en": "Added scene support. Updated dependencies."
+  },
+  "0.1.4": {
+    "en": "Minimal required Homey version changed to v4.2.0"
+  },
+  "0.1.5": {
+    "en": "Updated node-tradfri-client to v3.0.1 and clarified settings."
+  }
+}
